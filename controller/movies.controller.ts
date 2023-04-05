@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Movie from "../model/Movie";
 
 const getMovies = async (req: Request, res: Response) => {
-  const movies = await Movie.find().limit(10);
+  const movies = await Movie.find().limit(15);
   res.status(200).json({ success: true, movies });
 };
 
