@@ -9,7 +9,9 @@ const MONGO_URI = process.env.URI || "";
 const app: Application = express();
 app.use(express.json());
 app.use(cors());
+
 app.use("/movies", router);
+
 app.get("/", (req: Request, res: Response) => {
   res.send("hello express-TS");
 });
