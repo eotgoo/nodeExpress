@@ -1,17 +1,14 @@
 import { Request, Response } from "express";
 import Movie from "../model/Movie";
+import { Model } from "mongoose";
 
 const getMovies = async (req: Request, res: Response) => {
   const limit = Number(req.query.limit) || 10;
-  const page = Number(req.query.page) || 0;
+  const page = Number(req.query.page) || 1;
 
   const total = await Movie.countDocuments();
   const pageCount = Math.ceil(total / limit);
   const skip = (page - 1) * limit;
-
-  console.log("total:", total);
-  console.log("total:", pageCount);
-  console.log("Total:", skip);
 
   const movies = await Movie.find().skip(skip).limit(limit);
   res
@@ -25,4 +22,4 @@ const getMovie = async (req: Request, res: Response) => {
   res.status(200).json({ success: true, movie });
 };
 
-export { getMovie };
+export { getMovies, getMovie };
